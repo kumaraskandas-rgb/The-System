@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE SYSTEM: ECE Edition</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-green: #39ff14;
+            --dark-bg: #090d16;
+            --panel-bg: rgba(16, 22, 42, 0.9);
+        }
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+        }
+        .hud-card {
+            width: 100%;
+            max-width: 700px;
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-blue);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed var(--neon-blue);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .bar-container { margin: 12px 0; }
+        .bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+            color: #8fa3c7;
+        }
+        .bar-bg {
+            background: rgba(255, 255, 255, 0.05);
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00c6ff, var(--neon-blue));
+            box-shadow: 0 0 8px var(--neon-blue);
+            transition: width 0.5s ease-out;
+        }
+        .quest-box, .shop-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .action-btn {
+            background: transparent;
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .action-btn:hover {
+            background: var(--neon-green);
+            color: black;
+        }
+        .shop-btn {
+            border: 1px solid #ffd700;
+            color: #ffd700;
+        }
+        .shop-btn:hover {
+            background: #ffd700;
+            color: black;
+        }
+        .terminal-box {
+            font-family: monospace;
+            background: rgba(0,0,0,0.4);
+            padding: 10px;
+            border-radius: 4px;
+            color: #7fa6e7;
+            margin-bottom: 20px;
+            border-left: 3px solid var(--neon-blue);
+        }
+    </style>
+</head>
+<body>
+
+<div class="hud-card">
+    <header>
+        <div>
+            <h2 style="color: var(--neon-blue); margin:0; font-size:1.2rem; letter-spacing:1px;">THE SYSTEM v1.0</h2>
+            <small style="color: #657795;">Target Networks: RVITM / RNSIT / BNMIT / DSATM / PESM</small>
+        </div>
+        <div style="color: #ffd700; font-weight:bold; font-size:1.2rem;">GOLD: <span id="gold-amt">0</span>G</div>
+    </header>
+    
+    <div class="terminal-box" id="jarvis-status">
+        [JARVIS]: Pre-Season sequence active. Standing by to optimize your lifestyle routine, sir.
+    </div>
+
+    <div class="bar-container">
+        <div class="bar-label"><span>DAILY QUESTS</span><span id="txt-day">0%</span></div>
+        <div class="bar-bg"><div class="bar-fill" id="day-fill"></div></div>
+    </div>
+    <div class="bar-container">
+        <div class="bar-label"><span>WEEKLY CYCLE</span><span id="txt-week">15%</span></div>
+        <div class="bar-bg"><div class="bar-fill" id="week-fill" style="width: 15%;"></div></div>
+    </div>
+    <div class="bar-container">
+        <div class="bar-label"><span>MONTHLY CHAPTER</span><span id="txt-month">5%</span></div>
+        <div class="bar-bg"><div class="bar-fill" id="month-fill" style="width: 5%;"></div></div>
+    </div>
+
+    <h3 style="font-size:1rem; color:#a0c0ff; margin-top:20px;">ACTIVE OBJECTIVES</h3>
+    <div class="quest-box">
+        <span>Physical Health: 30-min outside run/workout (No Isolation Fix)</span>
+        <button class="action-btn" onclick="executeTask(50, 40)">+40G / +50%</button>
+    </div>
+    <div class="quest-box">
+        <span>Tech Awakening: Watch a 15-min breakdown on how a basic microchip functions</span>
+        <button class="action-btn" onclick="executeTask(50, 40)">+40G / +50%</button>
+    </div>
+
+    <h3 style="font-size:1rem; color:#ffd700; margin-top:20px;">INVENTORY SHOP</h3>
+    <div class="shop-item">
+        <span>Unlock Reward: 1 Episode of Anime (Solo Leveling / JJK / Naruto)</span>
+        <button class="action-btn shop-btn" onclick="buyReward(40)">COST: 40G</button>
+    </div>
+    <div class="shop-item">
+        <span>Unlock Reward: 1 Hour of Minecraft Castle Survival Building</span>
+        <button class="action-btn shop-btn" onclick="buyReward(80)">COST: 80G</button>
+    </div>
+</div>
+
+<script>
+    let sys = {
+        gold: parseInt(localStorage.getItem('sys_gold_v1')) || 0,
+        day: 0,
+        week: 15,
+        month: 5
+    };
+
+    function updateDisplay() {
+        document.getElementById('gold-amt').innerText = sys.gold;
+        document.getElementById('day-fill').style.width = sys.day + '%';
+        document.getElementById('txt-day').innerText = sys.day + '%';
+    }
+
+    window.executeTask = function(progressAmount, goldReward) {
+        sys.gold += goldReward;
+        sys.day = Math.min(sys.day + progressAmount, 100);
+        localStorage.setItem('sys_gold_v1', sys.gold);
+        
+        if(sys.day >= 100) {
+            sys.day = 0;
+            sys.week = Math.min(sys.week + 20, 100);
+            sys.month = Math.min(sys.month + 5, 100);
+            document.getElementById('week-fill').style.width = sys.week + '%';
+            document.getElementById('txt-week').innerText = sys.week + '%';
+            document.getElementById('month-fill').style.width = sys.month + '%';
+            document.getElementById('txt-month').innerText = sys.month + '%';
+            document.getElementById('jarvis-status').innerText = "[JARVIS]: Level clean! Daily metrics maximized. Your physical and technical stamina parameters are rising.";
+        } else {
+            document.getElementById('jarvis-status').innerText = "[JARVIS]: Task integration complete. +" + goldReward + " Gold allocated to account holdings.";
+        }
+        
+        event.target.disabled = true;
+        event.target.style.opacity = '0.3';
+        updateDisplay();
+    };
+
+    window.buyReward = function(cost) {
+        if(sys.gold >= cost) {
+            sys.gold -= cost;
+            localStorage.setItem('sys_gold_v1', sys.gold);
+            document.getElementById('jarvis-status').innerText = "[JARVIS]: Transaction authorized. Reward voucher unlocked. Enjoy your downtime, sir—you earned it.";
+            updateDisplay();
+        } else {
+            document.getElementById('jarvis-status').innerText = "[JARVIS]: ERROR: Insufficient gold balance. Complete active objectives to generate capital.";
+        }
+    };
+
+    updateDisplay();
+</script>
+</body>
+</html>
