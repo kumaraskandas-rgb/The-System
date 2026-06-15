@@ -5,96 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE SYSTEM: ECE Edition</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
+
         :root {
             --neon-blue: #00f3ff;
             --neon-green: #39ff14;
-            --dark-bg: #090d16;
-            --panel-bg: rgba(16, 22, 42, 0.9);
+            --dark-bg: #030712;
+            --panel-bg: rgba(6, 11, 25, 0.85);
+            --border-glow: rgba(0, 243, 255, 0.4);
         }
+
         body {
             background-color: var(--dark-bg);
-            color: #ffffff;
-            font-family: 'Segoe UI', sans-serif;
-            padding: 15px;
+            background-image: 
+                radial-gradient(at 50% 0%, rgba(0, 243, 255, 0.15) 0px, transparent 50%),
+                linear-gradient(rgba(18, 24, 38, 0.4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(18, 24, 38, 0.4) 1px, transparent 1px);
+            background-size: 100% 100%, 20px 20px, 20px 20px;
+            color: #e2e8f0;
+            font-family: 'Share Tech Mono', monospace;
+            padding: 20px;
             display: flex;
             justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
+
         .hud-card {
             width: 100%;
-            max-width: 700px;
+            max-width: 680px;
             background: var(--panel-bg);
-            border: 1px solid var(--neon-blue);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+            border: 2px solid var(--neon-blue);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 0 30px var(--border-glow), inset 0 0 15px rgba(0, 243, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Pulsing holographic scan line effect */
+        .hud-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            opacity: 0.5;
+            box-shadow: 0 0 10px var(--neon-blue);
+            animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px dashed var(--neon-blue);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 243, 255, 0.2);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
         }
-        .bar-container { margin: 12px 0; }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            margin: 0;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+            letter-spacing: 2px;
+        }
+
+        .gold-display {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            background: rgba(255, 215, 0, 0.1);
+            padding: 4px 12px;
+            border: 1px solid #ffd700;
+            border-radius: 6px;
+        }
+
+        .terminal-box {
+            background: rgba(0, 4, 12, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            color: #93c5fd;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--neon-blue);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            font-size: 1.05rem;
+            line-height: 1.4;
+        }
+
+        .bar-container {
+            margin: 18px 0;
+        }
+
         .bar-label {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
-            margin-bottom: 4px;
-            color: #8fa3c7;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+            color: #94a3b8;
+            letter-spacing: 1px;
         }
+
         .bar-bg {
-            background: rgba(255, 255, 255, 0.05);
-            height: 12px;
-            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            height: 16px;
+            border-radius: 4px;
             overflow: hidden;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            padding: 2px;
         }
+
         .bar-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #00c6ff, var(--neon-blue));
-            box-shadow: 0 0 8px var(--neon-blue);
-            transition: width 0.5s ease-out;
+            background: linear-gradient(90deg, #0284c7, var(--neon-blue));
+            box-shadow: 0 0 12px var(--neon-blue);
+            border-radius: 2px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: #f1f5f9;
+            margin-top: 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
         .quest-box, .shop-item {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 12px;
-            border-radius: 6px;
-            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
         }
+
+        .quest-box:hover {
+            background: rgba(0, 243, 255, 0.04);
+            border-color: rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+        }
+
         .action-btn {
-            background: transparent;
+            background: rgba(57, 255, 20, 0.05);
             border: 1px solid var(--neon-green);
             color: var(--neon-green);
-            padding: 6px 12px;
-            border-radius: 4px;
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            transition: all 0.3s;
         }
+
         .action-btn:hover {
             background: var(--neon-green);
-            color: black;
+            color: #000000;
+            box-shadow: 0 0 15px var(--neon-green);
+            font-weight: bold;
         }
+
         .shop-btn {
+            background: rgba(255, 215, 0, 0.05);
             border: 1px solid #ffd700;
             color: #ffd700;
         }
+
         .shop-btn:hover {
             background: #ffd700;
-            color: black;
-        }
-        .terminal-box {
-            font-family: monospace;
-            background: rgba(0,0,0,0.4);
-            padding: 10px;
-            border-radius: 4px;
-            color: #7fa6e7;
-            margin-bottom: 20px;
-            border-left: 3px solid var(--neon-blue);
+            color: #000000;
+            box-shadow: 0 0 15px #ffd700;
         }
     </style>
 </head>
@@ -103,47 +199,49 @@
 <div class="hud-card">
     <header>
         <div>
-            <h2 style="color: var(--neon-blue); margin:0; font-size:1.2rem; letter-spacing:1px;">THE SYSTEM v1.0</h2>
-            <small style="color: #657795;">Target Networks: RVITM / RNSIT / BNMIT / DSATM / PESM</small>
+            <h2>THE SYSTEM v1.0</h2>
+            <div style="color: #64748b; font-size: 0.85rem; margin-top: 4px; letter-spacing: 1px;">
+                CONNECTED_NETWORKS: [RVITM / RNSIT / BNMIT / DSATM / PESM]
+            </div>
         </div>
-        <div style="color: #ffd700; font-weight:bold; font-size:1.2rem;">GOLD: <span id="gold-amt">0</span>G</div>
+        <div class="gold-display">GOLD: <span id="gold-amt">0</span>G</div>
     </header>
     
     <div class="terminal-box" id="jarvis-status">
-        [JARVIS]: Pre-Season sequence active. Standing by to optimize your lifestyle routine, sir.
+        [JARVIS]: Pre-Season link stable. Monitoring baseline vital matrix. Standing by to issue daily directives, Hunter.
     </div>
 
     <div class="bar-container">
-        <div class="bar-label"><span>DAILY QUESTS</span><span id="txt-day">0%</span></div>
+        <div class="bar-label"><span>DAILY OBJECTIVES</span><span id="txt-day">0%</span></div>
         <div class="bar-bg"><div class="bar-fill" id="day-fill"></div></div>
     </div>
     <div class="bar-container">
-        <div class="bar-label"><span>WEEKLY CYCLE</span><span id="txt-week">15%</span></div>
+        <div class="bar-label"><span>WEEKLY PROGRESS CYCLE</span><span id="txt-week">15%</span></div>
         <div class="bar-bg"><div class="bar-fill" id="week-fill" style="width: 15%;"></div></div>
     </div>
     <div class="bar-container">
-        <div class="bar-label"><span>MONTHLY CHAPTER</span><span id="txt-month">5%</span></div>
+        <div class="bar-label"><span>MONTHLY STRATEGIC CHAPTER</span><span id="txt-month">5%</span></div>
         <div class="bar-bg"><div class="bar-fill" id="month-fill" style="width: 5%;"></div></div>
     </div>
 
-    <h3 style="font-size:1rem; color:#a0c0ff; margin-top:20px;">ACTIVE OBJECTIVES</h3>
+    <h3>ACTIVE QUESTS</h3>
     <div class="quest-box">
-        <span>Physical Health: 30-min outside run/workout (No Isolation Fix)</span>
-        <button class="action-btn" onclick="executeTask(50, 40)">+40G / +50%</button>
+        <span>[PHYSICAL] Baseline Conditioning: 30-min outside movement run/workout</span>
+        <button class="action-btn" onclick="executeTask(50, 40)">EXECUTE</button>
     </div>
     <div class="quest-box">
-        <span>Tech Awakening: Watch a 15-min breakdown on how a basic microchip functions</span>
-        <button class="action-btn" onclick="executeTask(50, 40)">+40G / +50%</button>
+        <span>[TECHNICAL] Awakening: Watch 15-min architectural breakdown on microchips</span>
+        <button class="action-btn" onclick="executeTask(50, 40)">EXECUTE</button>
     </div>
 
-    <h3 style="font-size:1rem; color:#ffd700; margin-top:20px;">INVENTORY SHOP</h3>
+    <h3 style="color: #ffd700;">REWARD INVENTORY SHOP</h3>
     <div class="shop-item">
-        <span>Unlock Reward: 1 Episode of Anime (Solo Leveling / JJK / Naruto)</span>
-        <button class="action-btn shop-btn" onclick="buyReward(40)">COST: 40G</button>
+        <span>[DOWNTIME] Purchase Voucher: 1 Episode of Anime</span>
+        <button class="action-btn shop-btn" onclick="buyReward(40)">40 GOLD</button>
     </div>
     <div class="shop-item">
-        <span>Unlock Reward: 1 Hour of Minecraft Castle Survival Building</span>
-        <button class="action-btn shop-btn" onclick="buyReward(80)">COST: 80G</button>
+        <span>[SQUAD] Sandbox Allocation: 1 Hour Minecraft Survival Core Build</span>
+        <button class="action-btn shop-btn" onclick="buyReward(80)">80 GOLD</button>
     </div>
 </div>
 
@@ -174,13 +272,13 @@
             document.getElementById('txt-week').innerText = sys.week + '%';
             document.getElementById('month-fill').style.width = sys.month + '%';
             document.getElementById('txt-month').innerText = sys.month + '%';
-            document.getElementById('jarvis-status').innerText = "[JARVIS]: Level clean! Daily metrics maximized. Your physical and technical stamina parameters are rising.";
+            document.getElementById('jarvis-status').innerText = "[JARVIS]: Quest Phase Complete! Macros adjusted. Your execution consistency matrix is showing peak efficiency growth, sir.";
         } else {
-            document.getElementById('jarvis-status').innerText = "[JARVIS]: Task integration complete. +" + goldReward + " Gold allocated to account holdings.";
+            document.getElementById('jarvis-status').innerText = "[JARVIS]: Objective updated. +" + goldReward + "G added. Keep accelerating, sir.";
         }
         
         event.target.disabled = true;
-        event.target.style.opacity = '0.3';
+        event.target.style.opacity = '0.2';
         updateDisplay();
     };
 
@@ -188,10 +286,10 @@
         if(sys.gold >= cost) {
             sys.gold -= cost;
             localStorage.setItem('sys_gold_v1', sys.gold);
-            document.getElementById('jarvis-status').innerText = "[JARVIS]: Transaction authorized. Reward voucher unlocked. Enjoy your downtime, sir—you earned it.";
+            document.getElementById('jarvis-status').innerText = "[JARVIS]: Authorization confirmed. Rewards inventory unlocked. Enjoy your breakdown time, Hunter.";
             updateDisplay();
         } else {
-            document.getElementById('jarvis-status').innerText = "[JARVIS]: ERROR: Insufficient gold balance. Complete active objectives to generate capital.";
+            document.getElementById('jarvis-status').innerText = "[JARVIS]: WARNING: Resource deficit. Earn additional Gold blocks via daily executions to buy this voucher.";
         }
     };
 
