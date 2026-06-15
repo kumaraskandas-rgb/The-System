@@ -3,251 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE SYSTEM: ECE Edition</title>
+    <title>THE SYSTEM: ECE HUNTER</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
 
         :root {
-            --neon-blue: #00f3ff;
-            --neon-green: #39ff14;
-            --dark-bg: #030712;
-            --panel-bg: rgba(6, 11, 25, 0.85);
-            --border-glow: rgba(0, 243, 255, 0.4);
+            --system-blue: #00f3ff;
+            --system-glow: rgba(0, 243, 255, 0.4);
+            --gold: #ffd700;
+            --dark-void: #02050e;
         }
 
         body {
-            background-color: var(--dark-bg);
+            background-color: var(--dark-void);
             background-image: 
-                radial-gradient(at 50% 0%, rgba(0, 243, 255, 0.15) 0px, transparent 50%),
-                linear-gradient(rgba(18, 24, 38, 0.4) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(18, 24, 38, 0.4) 1px, transparent 1px);
-            background-size: 100% 100%, 20px 20px, 20px 20px;
-            color: #e2e8f0;
+                radial-gradient(circle at 50% 30%, rgba(0, 150, 255, 0.1) 0%, transparent 60%),
+                linear-gradient(rgba(0, 243, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 25px 25px, 25px 25px;
+            color: #ffffff;
             font-family: 'Share Tech Mono', monospace;
             padding: 20px;
             display: flex;
             justify-content: center;
+            align-items: center;
             min-height: 100vh;
+            margin: 0;
             box-sizing: border-box;
         }
 
-        .hud-card {
+        .system-window {
             width: 100%;
-            max-width: 680px;
-            background: var(--panel-bg);
-            border: 2px solid var(--neon-blue);
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 0 30px var(--border-glow), inset 0 0 15px rgba(0, 243, 255, 0.1);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Pulsing holographic scan line effect */
-        .hud-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: var(--neon-blue);
-            opacity: 0.5;
-            box-shadow: 0 0 10px var(--neon-blue);
-            animation: scan 4s linear infinite;
-        }
-
-        @keyframes scan {
-            0% { top: 0%; }
-            100% { top: 100%; }
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid rgba(0, 243, 255, 0.2);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-blue);
-            margin: 0;
-            font-size: 1.5rem;
-            text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
-            letter-spacing: 2px;
-        }
-
-        .gold-display {
-            font-family: 'Orbitron', sans-serif;
-            color: #ffd700;
-            font-weight: bold;
-            font-size: 1.3rem;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            background: rgba(255, 215, 0, 0.1);
-            padding: 4px 12px;
-            border: 1px solid #ffd700;
-            border-radius: 6px;
-        }
-
-        .terminal-box {
-            background: rgba(0, 4, 12, 0.8);
-            padding: 15px;
-            border-radius: 8px;
-            color: #93c5fd;
-            margin-bottom: 25px;
-            border-left: 4px solid var(--neon-blue);
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-            font-size: 1.05rem;
-            line-height: 1.4;
-        }
-
-        .bar-container {
-            margin: 18px 0;
-        }
-
-        .bar-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.95rem;
-            margin-bottom: 6px;
-            color: #94a3b8;
-            letter-spacing: 1px;
-        }
-
-        .bar-bg {
-            background: rgba(255, 255, 255, 0.03);
-            height: 16px;
+            max-width: 600px;
+            background: rgba(6, 15, 30, 0.85);
+            border: 2px solid var(--system-blue);
+            box-shadow: 0 0 25px var(--system-glow), inset 0 0 20px rgba(0, 243, 255, 0.15);
             border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 243, 255, 0.2);
-            padding: 2px;
+            padding: 20px;
+            backdrop-filter: blur(8px);
+            position: relative;
         }
 
-        .bar-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #0284c7, var(--neon-blue));
-            box-shadow: 0 0 12px var(--neon-blue);
-            border-radius: 2px;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Top Corner Accents to look like a game window */
+        .system-window::before {
+            content: '▲';
+            position: absolute;
+            top: -2px; left: 10px;
+            color: var(--system-blue);
+            font-size: 8px;
+            text-shadow: 0 0 5px var(--system-blue);
         }
 
-        h3 {
+        .system-header {
+            border-bottom: 2px solid var(--system-blue);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .system-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            color: #f1f5f9;
-            margin-top: 25px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 6px;
-            letter-spacing: 1px;
+            color: var(--system-blue);
+            font-size: 1.6rem;
+            letter-spacing: 4px;
+            margin: 0;
+            text-shadow: 0 0 12px rgba(0, 243, 255, 0.8);
+            font-weight: 700;
         }
 
-        .quest-box, .shop-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(0, 243, 255, 0.1);
-            padding: 14px;
-            border-radius: 8px;
-            margin-top: 12px;
+        .sub-header {
+            color: #64748b;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        .status-panel {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 6px 0;
+            border-bottom: 1px dashed rgba(0, 243, 255, 0.1);
+            padding-bottom: 4px;
+        }
+
+        .label-blue {
+            color: var(--system-blue);
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.4);
+        }
+
+        .gold-txt {
+            color: var(--gold);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.4);
+            font-weight: bold;
+        }
+
+        .quest-section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffffff;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin: 20px 0 10px 0;
+            border-left: 3px solid var(--system-blue);
+            padding-left: 8px;
+        }
+
+        /* Quest Card Styling - Solo Leveling Window style */
+        .quest-box {
+            background: rgba(0, 243, 255, 0.03);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
         }
 
-        .quest-box:hover {
-            background: rgba(0, 243, 255, 0.04);
-            border-color: rgba(0, 243, 255, 0.3);
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+        .quest-info {
+            max-width: 75%;
         }
 
-        .action-btn {
-            background: rgba(57, 255, 20, 0.05);
-            border: 1px solid var(--neon-green);
-            color: var(--neon-green);
+        .quest-meta {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .system-btn {
+            background: rgba(0, 243, 255, 0.05);
+            border: 1px solid var(--system-blue);
+            color: var(--system-blue);
             padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            transition: all 0.3s;
+            font-size: 0.8rem;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+            border-radius: 2px;
         }
 
-        .action-btn:hover {
-            background: var(--neon-green);
-            color: #000000;
-            box-shadow: 0 0 15px var(--neon-green);
+        .system-btn:hover {
+            background: var(--system-blue);
+            color: var(--dark-void);
+            box-shadow: 0 0 15px var(--system-blue);
             font-weight: bold;
         }
 
         .shop-btn {
+            border-color: var(--gold);
+            color: var(--gold);
             background: rgba(255, 215, 0, 0.05);
-            border: 1px solid #ffd700;
-            color: #ffd700;
         }
 
         .shop-btn:hover {
-            background: #ffd700;
-            color: #000000;
-            box-shadow: 0 0 15px #ffd700;
+            background: var(--gold);
+            color: var(--dark-void);
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            margin: 15px 0;
+        }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+        .progress-bar-bg {
+            background: rgba(255, 255, 255, 0.03);
+            height: 10px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 2px;
+            padding: 1px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #0284c7, var(--system-blue));
+            box-shadow: 0 0 8px var(--system-blue);
+            transition: width 0.5s ease-out;
         }
     </style>
 </head>
 <body>
 
-<div class="hud-card">
-    <header>
-        <div>
-            <h2>THE SYSTEM v1.0</h2>
-            <div style="color: #64748b; font-size: 0.85rem; margin-top: 4px; letter-spacing: 1px;">
-                CONNECTED_NETWORKS: [RVITM / RNSIT / BNMIT / DSATM / PESM]
-            </div>
+<div class="system-window">
+    <div class="system-header">
+        <h1 class="system-title">QUEST INFO</h1>
+        <div class="sub-header">START PRE-SEASON TRAINING</div>
+    </div>
+
+    <div class="status-panel" id="jarvis-log" style="color: #93c5fd; border-left: 3px solid var(--system-blue); background: rgba(0,0,0,0.4);">
+        [JARVIS]: System link fully operational, Hunter. Monitoring your daily adaptation matrices.
+    </div>
+
+    <div class="status-panel">
+        <div class="status-row">
+            <span>PLAYER: <span class="label-blue">KUMARA SKANDAS (ECE)</span></span>
+            <span>INVENTORY GOLD: <span class="gold-txt" id="gold-amt">0</span>G</span>
         </div>
-        <div class="gold-display">GOLD: <span id="gold-amt">0</span>G</div>
-    </header>
-    
-    <div class="terminal-box" id="jarvis-status">
-        [JARVIS]: Pre-Season link stable. Monitoring baseline vital matrix. Standing by to issue daily directives, Hunter.
+        <div class="status-row">
+            <span>CURRENT_PHASE: <span class="label-blue">PRE-SEASON CALIBRATION</span></span>
+            <span>TARGETS: <span style="color: #cbd5e1;">VTU NETWORKS</span></span>
+        </div>
     </div>
 
-    <div class="bar-container">
-        <div class="bar-label"><span>DAILY OBJECTIVES</span><span id="txt-day">0%</span></div>
-        <div class="bar-bg"><div class="bar-fill" id="day-fill"></div></div>
+    <div class="progress-container">
+        <div class="progress-header"><span>DAILY OBJECTIVES</span><span id="txt-day">0%</span></div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="day-fill"></div></div>
     </div>
-    <div class="bar-container">
-        <div class="bar-label"><span>WEEKLY PROGRESS CYCLE</span><span id="txt-week">15%</span></div>
-        <div class="bar-bg"><div class="bar-fill" id="week-fill" style="width: 15%;"></div></div>
+    <div class="progress-container">
+        <div class="progress-header"><span>WEEKLY TIMELINE CYCLE</span><span id="txt-week">15%</span></div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="week-fill" style="width: 15%;"></div></div>
     </div>
-    <div class="bar-container">
-        <div class="bar-label"><span>MONTHLY STRATEGIC CHAPTER</span><span id="txt-month">5%</span></div>
-        <div class="bar-bg"><div class="bar-fill" id="month-fill" style="width: 5%;"></div></div>
+    <div class="progress-container">
+        <div class="progress-header"><span>MONTHLY STRATEGIC CHAPTER</span><span id="txt-month">5%</span></div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="month-fill" style="width: 5%;"></div></div>
     </div>
 
-    <h3>ACTIVE QUESTS</h3>
+    <div class="quest-section-title">ACTIVE DAILY QUESTS</div>
     <div class="quest-box">
-        <span>[PHYSICAL] Baseline Conditioning: 30-min outside movement run/workout</span>
-        <button class="action-btn" onclick="executeTask(50, 40)">EXECUTE</button>
+        <div class="quest-info">
+            <div>[PHYSICAL] Baseline Conditioning</div>
+            <div class="quest-meta">30-minute outside active body movement / run</div>
+        </div>
+        <button class="system-btn" onclick="executeTask(50, 40)">ACCEPT</button>
     </div>
     <div class="quest-box">
-        <span>[TECHNICAL] Awakening: Watch 15-min architectural breakdown on microchips</span>
-        <button class="action-btn" onclick="executeTask(50, 40)">EXECUTE</button>
+        <div class="quest-info">
+            <div>[TECHNICAL] Intellectual Awakening</div>
+            <div class="quest-meta">Watch 15-min architectural video on hardware microchips</div>
+        </div>
+        <button class="system-btn" onclick="executeTask(50, 40)">ACCEPT</button>
     </div>
 
-    <h3 style="color: #ffd700;">REWARD INVENTORY SHOP</h3>
-    <div class="shop-item">
-        <span>[DOWNTIME] Purchase Voucher: 1 Episode of Anime</span>
-        <button class="action-btn shop-btn" onclick="buyReward(40)">40 GOLD</button>
+    <div class="quest-section-title" style="border-left-color: var(--gold);">REWARD SHOP INVENTORY</div>
+    <div class="quest-box" style="border-color: rgba(255,215,0,0.15);">
+        <div class="quest-info">
+            <div>[DOWNTIME] Anime Voucher</div>
+            <div class="quest-meta">Unlock 1 episode streaming allocation</div>
+        </div>
+        <button class="system-btn shop-btn" onclick="buyReward(40)">40 GOLD</button>
     </div>
-    <div class="shop-item">
-        <span>[SQUAD] Sandbox Allocation: 1 Hour Minecraft Survival Core Build</span>
-        <button class="action-btn shop-btn" onclick="buyReward(80)">80 GOLD</button>
+    <div class="quest-box" style="border-color: rgba(255,215,0,0.15);">
+        <div class="quest-info">
+            <div>[SQUAD] Sandbox Allocation</div>
+            <div class="quest-meta">Unlock 1 hour Minecraft survival build session</div>
+        </div>
+        <button class="system-btn shop-btn" onclick="buyReward(80)">80 GOLD</button>
     </div>
 </div>
 
 <script>
     let sys = {
-        gold: parseInt(localStorage.getItem('sys_gold_v1')) || 0,
+        gold: parseInt(localStorage.getItem('sys_gold_v2')) || 0,
         day: 0,
         week: 15,
         month: 5
@@ -262,7 +284,7 @@
     window.executeTask = function(progressAmount, goldReward) {
         sys.gold += goldReward;
         sys.day = Math.min(sys.day + progressAmount, 100);
-        localStorage.setItem('sys_gold_v1', sys.gold);
+        localStorage.setItem('sys_gold_v2', sys.gold);
         
         if(sys.day >= 100) {
             sys.day = 0;
@@ -272,9 +294,9 @@
             document.getElementById('txt-week').innerText = sys.week + '%';
             document.getElementById('month-fill').style.width = sys.month + '%';
             document.getElementById('txt-month').innerText = sys.month + '%';
-            document.getElementById('jarvis-status').innerText = "[JARVIS]: Quest Phase Complete! Macros adjusted. Your execution consistency matrix is showing peak efficiency growth, sir.";
+            document.getElementById('jarvis-log').innerText = "[JARVIS]: Level Cleared! Daily quotas maximized. Excellent execution metrics, sir.";
         } else {
-            document.getElementById('jarvis-status').innerText = "[JARVIS]: Objective updated. +" + goldReward + "G added. Keep accelerating, sir.";
+            document.getElementById('jarvis-log').innerText = "[JARVIS]: Objective updated. +" + goldReward + "G added to secure ledger.";
         }
         
         event.target.disabled = true;
@@ -285,11 +307,11 @@
     window.buyReward = function(cost) {
         if(sys.gold >= cost) {
             sys.gold -= cost;
-            localStorage.setItem('sys_gold_v1', sys.gold);
-            document.getElementById('jarvis-status').innerText = "[JARVIS]: Authorization confirmed. Rewards inventory unlocked. Enjoy your breakdown time, Hunter.";
+            localStorage.setItem('sys_gold_v2', sys.gold);
+            document.getElementById('jarvis-log').innerText = "[JARVIS]: Voucher authorized. Enjoy your entertainment segment, Hunter.";
             updateDisplay();
         } else {
-            document.getElementById('jarvis-status').innerText = "[JARVIS]: WARNING: Resource deficit. Earn additional Gold blocks via daily executions to buy this voucher.";
+            document.getElementById('jarvis-log').innerText = "[JARVIS]: WARNING: Resource deficit. Complete active objectives to acquire required gold.";
         }
     };
 
