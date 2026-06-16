@@ -3,382 +3,426 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE SYSTEM: OVERLORD MAINFRAME</title>
+    <title>THE MAINFRAME: SOVEREIGN CORE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
 
         :root {
-            --sys-blue: #00f3ff;
-            --sys-dark: #004488;
-            --sys-glow: rgba(0, 243, 255, 0.4);
-            --sys-gold: #ffd700;
-            --void-bg: #010409;
-            --panel-glass: rgba(6, 16, 32, 0.95);
+            --neon-blue: #00f3ff;
+            --dark-blue: #004488;
+            --glow: rgba(0, 243, 255, 0.35);
+            --gold: #ffd700;
+            --bg-void: #02050d;
+            --glass: rgba(5, 12, 28, 0.85);
         }
 
         body {
-            background-color: var(--void-bg);
+            background-color: var(--bg-void);
+            /* Dark smoky space pattern to match shadow gate atmosphere */
             background-image: 
-                radial-gradient(circle at 50% 15%, rgba(0, 150, 255, 0.25) 0%, transparent 60%),
-                linear-gradient(rgba(0, 243, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 243, 255, 0.02) 1px, transparent 1px);
-            background-size: 100% 100%, 30px 30px, 30px 30px;
+                radial-gradient(circle at 50% 30%, rgba(0, 102, 204, 0.15) 0%, transparent 65%),
+                linear-gradient(rgba(0, 243, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.01) 1px, transparent 1px);
+            background-size: 100% 100%, 32px 32px, 32px 32px;
             color: #ffffff;
             font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 25px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            padding: 40px 20px;
             box-sizing: border-box;
+            overflow-x: hidden;
         }
 
-        /* Expanded to full-screen desktop dimensions */
-        .system-frame {
+        /* Full Screen Landscape Tactical Frame */
+        .mainframe-container {
             width: 100%;
-            max-width: 950px; /* Massively expanded width */
-            background: var(--panel-glass);
-            border: 2px solid var(--sys-blue);
-            box-shadow: 0 0 40px var(--sys-glow), inset 0 0 30px rgba(0, 243, 255, 0.15);
+            max-width: 1200px;
+            background: var(--glass);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 45px var(--glow), inset 0 0 25px rgba(0, 243, 255, 0.1);
             border-radius: 8px;
-            padding: 40px; /* More internal breathing room */
-            backdrop-filter: blur(12px);
+            padding: 30px;
+            backdrop-filter: blur(15px);
             position: relative;
+            display: grid;
+            grid-template-columns: 380px 1fr; /* Split layout: Left Assistant, Right Modules */
+            gap: 30px;
         }
 
-        .system-frame::before { content: '◈ SYSTEM_MAINFRAME_ONLINE'; position: absolute; top: 12px; left: 15px; color: var(--sys-blue); font-size: 11px; font-family: 'Orbitron', sans-serif; letter-spacing: 2px; opacity: 0.7; }
-        .system-frame::after { content: 'DESIGNATION: ECE_HUNTER_CORE'; position: absolute; bottom: 12px; right: 15px; color: rgba(0,243,255,0.3); font-size: 10px; letter-spacing: 2px; }
-
-        .header-block {
-            text-align: center;
-            border-bottom: 3px double var(--sys-blue);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+        /* Top Bar Interface Info */
+        .mainframe-container::before { 
+            content: '▲ SYSTEM_MAINFRAME // SECURE_LINK_ACTIVE'; 
+            position: absolute; top: 10px; left: 20px; 
+            color: var(--neon-blue); font-family: 'Orbitron', sans-serif; font-size: 11px; letter-spacing: 2px; opacity: 0.8;
         }
 
-        .main-headline {
+        /* Holographic Pulsing Scan Line across layout */
+        .mainframe-container::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            opacity: 0.3; animation: scanline 6s linear infinite; pointer-events: none;
+        }
+
+        @keyframes scanline { 0% { top: 0%; } 100% { top: 100%; } }
+
+        /* ================= LEFT SIDE: PERSONAL ASSISTANT CORE ================= */
+        .assistant-deck {
+            border-right: 1px solid rgba(0, 243, 255, 0.15);
+            padding-right: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hud-header {
+            margin-bottom: 25px;
+        }
+
+        .identity-title {
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
-            font-size: 2.8rem; /* Bigger title text */
-            letter-spacing: 8px;
+            font-size: 1.8rem;
+            letter-spacing: 4px;
             margin: 0;
-            color: #ffffff;
-            text-shadow: 0 0 15px var(--sys-blue), 0 0 30px var(--sys-dark);
+            text-shadow: 0 0 12px var(--neon-blue);
         }
 
-        /* Upgraded Wide Navigation Grid */
-        .nav-tabs {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 35px;
-        }
-
-        .tab-btn {
-            background: rgba(0, 243, 255, 0.03);
-            border: 1px solid rgba(0, 243, 255, 0.2);
-            color: #94a3b8;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem; /* Highly readable font sizing */
-            font-weight: 700;
-            padding: 16px 10px;
-            cursor: pointer;
-            text-align: center;
+        .identity-sub {
+            font-size: 0.85rem;
+            color: #64748b;
             letter-spacing: 2px;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 4px;
         }
 
-        .tab-btn:hover {
-            color: #ffffff;
-            background: rgba(0, 243, 255, 0.08);
-            border-color: var(--sys-blue);
-            box-shadow: 0 0 12px rgba(0, 243, 255, 0.15);
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(180deg, rgba(0,243,255,0.2) 0%, rgba(0,68,136,0.4) 100%);
-            border: 1px solid var(--sys-blue);
-            color: var(--sys-blue);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.35);
-            text-shadow: 0 0 8px var(--sys-blue);
-        }
-
-        .hud-content {
-            display: none;
-            animation: paneFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .hud-content.active { display: block; }
-
-        @keyframes paneFade {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Large System Panel Blocks */
-        .status-box {
+        .profile-card {
             background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 243, 255, 0.2);
-            padding: 24px;
-            margin-bottom: 25px;
+            border: 1px dashed rgba(0, 243, 255, 0.3);
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .profile-row {
+            display: flex; justify-content: space-between;
+            font-size: 1.2rem; margin: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 6px;
+        }
+
+        /* JARVIS Live Terminal Log Box */
+        .jarvis-terminal-box {
+            background: rgba(1, 4, 12, 0.9);
+            border-left: 4px solid var(--neon-blue);
+            padding: 16px;
             border-radius: 4px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
-        }
-
-        .info-row {
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+            flex-grow: 1;
             display: flex;
-            justify-content: space-between;
-            margin: 14px 0;
-            font-size: 1.4rem; /* Prominent clear text sizing */
-            border-bottom: 1px dashed rgba(0, 243, 255, 0.15);
-            padding-bottom: 10px;
+            flex-direction: column;
+            justify-content: flex-start;
         }
 
-        .cyan-glow { color: var(--sys-blue); text-shadow: 0 0 8px rgba(0,243,255,0.5); font-weight: bold; }
-        .gold-glow { color: var(--sys-gold); text-shadow: 0 0 8px rgba(255,215,0,0.5); font-weight: bold; }
-
-        /* Widescreen Performance Bars */
-        .meter-group { margin: 24px 0; }
-        .meter-label { display: flex; justify-content: space-between; font-size: 1.1rem; color: #cbd5e1; margin-bottom: 8px; letter-spacing: 2px; }
-        .meter-track { background: rgba(0,0,0,0.7); height: 18px; border: 1px solid rgba(0, 243, 255, 0.3); padding: 2px; }
-        .meter-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--sys-dark), var(--sys-blue)); box-shadow: 0 0 15px var(--sys-blue); transition: width 0.6s cubic-bezier(0.1, 0.8, 0.2, 1); }
-
-        /* Large Game Cards */
-        .game-card {
-            background: rgba(0, 243, 255, 0.01);
-            border: 1px solid rgba(0, 243, 255, 0.15);
-            padding: 20px 25px;
-            margin-bottom: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.25s ease;
-        }
-        .game-card:hover { 
-            background: rgba(0, 243, 255, 0.04); 
-            border-color: var(--sys-blue);
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
-        }
-        .card-name { font-size: 1.3rem; font-weight: bold; letter-spacing: 1px; }
-        .card-sub { font-size: 1rem; color: #94a3b8; margin-top: 5px; }
-
-        .btn-action {
-            background: transparent;
-            border: 2px solid var(--sys-blue);
-            color: var(--sys-blue);
+        .jarvis-tag {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            font-weight: bold;
-            padding: 12px 24px;
-            cursor: pointer;
-            letter-spacing: 2px;
+            color: var(--neon-blue);
+            font-size: 0.9rem; font-weight: bold; letter-spacing: 1px; margin-bottom: 8px;
+        }
+
+        .jarvis-response {
+            color: #93c5fd; font-size: 1.1rem; line-height: 1.5; transition: color 0.2s;
+        }
+
+        /* ================= RIGHT SIDE: EXPANDABLE MATRIX INTERFACE ================= */
+        .matrix-deck {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation Node Header */
+        .matrix-navigation {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px; margin-bottom: 25px;
+        }
+
+        .nav-node {
+            background: rgba(0, 243, 255, 0.02);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            color: #94a3b8; font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem; font-weight: 700; padding: 14px;
+            cursor: pointer; text-align: center; letter-spacing: 2px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .nav-node:hover {
+            color: #ffffff; background: rgba(0, 243, 255, 0.08); border-color: var(--neon-blue);
+        }
+
+        .nav-node.active {
+            background: linear-gradient(180deg, rgba(0,243,255,0.15) 0%, rgba(0,68,136,0.3) 100%);
+            border: 1px solid var(--neon-blue); color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.25); text-shadow: 0 0 6px var(--neon-blue);
+        }
+
+        /* Content Panes Switcher Configuration */
+        .matrix-pane {
+            display: none;
+            animation: slideIn 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        .matrix-pane.active { display: block; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* RPG Stats Layout Elements */
+        .stat-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;
+        }
+
+        .stat-block {
+            background: rgba(0,0,0,0.4); border: 1px solid rgba(0,243,255,0.15); padding: 16px;
+        }
+
+        .stat-label { font-size: 1.05rem; color: #94a3b8; }
+        .stat-val { font-size: 1.8rem; font-family: 'Orbitron', sans-serif; color: var(--neon-blue); margin-top: 5px; font-weight: bold; }
+
+        /* Tactical Calibration Bars */
+        .gauge-wrapper { margin: 20px 0; }
+        .gauge-label { display: flex; justify-content: space-between; font-size: 1.05rem; color: #cbd5e1; margin-bottom: 6px; }
+        .gauge-track { background: rgba(0,0,0,0.6); height: 14px; border: 1px solid rgba(0, 243, 255, 0.25); padding: 2px; }
+        .gauge-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--dark-blue), var(--neon-blue)); box-shadow: 0 0 12px var(--neon-blue); transition: width 0.5s ease-out; }
+
+        /* Tactical Cards Layout */
+        .directive-card {
+            background: rgba(0, 243, 255, 0.01);
+            border: 1px solid rgba(0, 243, 255, 0.12);
+            padding: 18px 22px; margin-bottom: 14px;
+            display: flex; justify-content: space-between; align-items: center;
             transition: all 0.2s;
         }
-        .btn-action:hover { background: var(--sys-blue); color: var(--void-bg); box-shadow: 0 0 20px var(--sys-blue); }
-        .btn-gold { border-color: var(--sys-gold); color: var(--sys-gold); }
-        .btn-gold:hover { background: var(--sys-gold); color: var(--void-bg); box-shadow: 0 0 20px var(--sys-gold); }
 
-        .log-terminal {
-            border-left: 4px solid var(--sys-blue);
-            background: rgba(0,4,12,0.9);
-            padding: 16px 20px;
-            color: #93c5fd;
-            font-size: 1.15rem;
-            margin-bottom: 25px;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
-            letter-spacing: 0.5px;
+        .directive-card:hover {
+            background: rgba(0, 243, 255, 0.03); border-color: var(--neon-blue);
+            box-shadow: 0 0 12px rgba(0,243,255,0.08);
         }
+
+        .directive-name { font-size: 1.2rem; font-weight: bold; letter-spacing: 0.5px; }
+        .directive-sub { font-size: 0.95rem; color: #94a3b8; margin-top: 4px; }
+
+        /* Glowing Functional Triggers */
+        .trigger-btn {
+            background: transparent; border: 2px solid var(--neon-blue); color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: bold;
+            padding: 10px 20px; cursor: pointer; letter-spacing: 2px; transition: all 0.2s;
+        }
+
+        .trigger-btn:hover { background: var(--neon-blue); color: var(--bg-void); box-shadow: 0 0 20px var(--neon-blue); }
+        
+        .trigger-gold { border-color: var(--gold); color: var(--gold); }
+        .trigger-gold:hover { background: var(--gold); color: var(--bg-void); box-shadow: 0 0 20px var(--gold); }
     </style>
 </head>
 <body>
 
-<div class="system-frame">
-    <div class="header-block">
-        <h1 class="main-headline">STATUS MAINFRAME</h1>
-    </div>
-
-    <!-- Wide Navigation Grid Tabs -->
-    <div class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab(event, 'pane-profile')">PROFILE</button>
-        <button class="tab-btn" onclick="switchTab(event, 'pane-stats')">STATS</button>
-        <button class="tab-btn" onclick="switchTab(event, 'pane-tasks')">QUEST BOARD</button>
-        <button class="tab-btn" onclick="switchTab(event, 'pane-rewards')">REWARD SHOP</button>
-    </div>
-
-    <!-- Feed Monitoring Box -->
-    <div class="log-terminal" id="sys-feed">
-        [SYSTEM]: Core interface synchronization online. Standing by for execution clearance, Hunter.
-    </div>
-
-    <!-- ================= TAB 1: PROFILE ================= -->
-    <div id="pane-profile" class="hud-content active">
-        <div class="status-box">
-            <div class="info-row"><span>PLAYER UNIQUE DESIGNATION:</span><span class="cyan-glow">KUMARA SKANDAS</span></div>
-            <div class="info-row"><span>ACTIVE SECTOR CLASS:</span><span class="cyan-glow">ECE DEPLOYED HUNTER</span></div>
-            <div class="info-row"><span>CURRENT LEVEL:</span><span class="cyan-glow" id="prof-level">12</span></div>
-            <div class="info-row"><span>INVENTORY GOLD VALUATION:</span><span class="gold-glow" id="prof-gold">0</span>G</div>
+<div class="mainframe-container">
+    
+    <!-- ================= LEFT COLUMN: THE PERSONAL ASSISTANT HUB ================= -->
+    <div class="assistant-deck">
+        <div class="hud-header">
+            <h1 class="identity-title">SYSTEM CORE</h1>
+            <div class="identity-sub">SOVEREIGN AI MATRIX</div>
         </div>
-        <div class="status-box" style="border-left: 4px solid var(--sys-gold); background: linear-gradient(90deg, rgba(255,215,0,0.03) 0%, transparent 100%);">
-            <div style="font-size: 1.1rem; color: #cbd5e1; margin-bottom: 6px; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;">ACTIVE TITLE MATRIX CONTEXT</div>
-            <div style="font-size: 1.5rem; font-weight: 900; color: var(--sys-gold); letter-spacing: 2px;">[THE ARCHITECT OVERLORD]</div>
-            <div style="font-size: 1rem; color: #94a3b8; margin-top: 6px; line-height: 1.4;">Active system parameters apply a +40% concentration baseline cushion during hardware mapping and structural optimization operations.</div>
+
+        <div class="profile-card">
+            <div class="profile-row"><span>HUNTER:</span><span style="color:var(--neon-blue); font-weight:bold;">K. SKANDAS</span></div>
+            <div class="profile-row"><span>CLASS:</span><span style="color:var(--neon-blue);">ECE DEPLOYED</span></div>
+            <div class="profile-row"><span>LEVEL:</span><span style="color:var(--neon-blue);" id="lbl-level">12</span></div>
+            <div class="profile-row"><span>RESERVE:</span><span style="color:var(--gold); font-weight:bold;"><span id="lbl-gold">0</span>G</span></div>
+        </div>
+
+        <!-- JARVIS Assistant Log Screen -->
+        <div class="jarvis-terminal-box">
+            <div class="jarvis-tag">[JARVIS INTEGRATION]</div>
+            <div class="jarvis-response" id="jarvis-out">
+                Welcome back, sir. Widescreen landscape links are established. I've mapped out your baseline metrics and am ready to clear today's operational data loops.
+            </div>
         </div>
     </div>
 
-    <!-- ================= TAB 2: STATS ================= -->
-    <div id="pane-stats" class="hud-content">
-        <div class="status-box">
-            <div class="info-row"><span>STRENGTH (Physical Consistency Matrix):</span><span class="cyan-glow" id="val-str">45</span></div>
-            <div class="info-row"><span>INTELLIGENCE (Technical Strategic Focus):</span><span class="cyan-glow" id="val-int">62</span></div>
-            <div class="info-row"><span>AGILITY (Operational Execution Velocity):</span><span class="cyan-glow" id="val-agi">38</span></div>
-        </div>
+    <!-- ================= RIGHT COLUMN: EXPANDABLE SYSTEM OVERLAYS ================= -->
+    <div class="matrix-deck">
         
-        <div class="meter-group">
-            <div class="meter-label"><span>DAILY OBJECTIVES CALIBRATION</span><span id="txt-day">0%</span></div>
-            <div class="meter-track"><div class="meter-bar" id="day-fill"></div></div>
+        <!-- Widescreen Navigation Matrix -->
+        <div class="matrix-navigation">
+            <button class="nav-node active" onclick="engagePane(event, 'pane-stats')">STATS MATRIX</button>
+            <button class="nav-node" onclick="engagePane(event, 'pane-quests')">QUEST MATRIX</button>
+            <button class="nav-node" onclick="engagePane(event, 'pane-rewards')">REWARD INVENTORY</button>
         </div>
-        <div class="meter-group">
-            <div class="meter-label"><span>WEEKLY LOOP TARGET METRICS</span><span id="txt-week">15%</span></div>
-            <div class="meter-track"><div class="meter-bar" id="week-fill" style="width: 15%;"></div></div>
-        </div>
-    </div>
 
-    <!-- ================= TAB 3: TASKS ================= -->
-    <div id="pane-tasks" class="hud-content">
-        <div class="game-card">
-            <div>
-                <div class="card-name">[DAILY MISSION] PHYSICAL CONDITIONING SEC_01</div>
-                <div class="card-sub">Execute a 30-minute high-vibrancy active outdoor core workout or run tracking allocation.</div>
+        <!-- ================= PANEL 1: STATS & PROGRESS ================= -->
+        <div id="pane-stats" class="matrix-pane active">
+            <div class="stat-grid">
+                <div class="stat-block">
+                    <div class="stat-label">STRENGTH (Execution Physicality)</div>
+                    <div class="stat-val" id="val-str">45</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-label">INTELLIGENCE (Technical Strategy)</div>
+                    <div class="stat-val" id="val-int">62</div>
+                </div>
             </div>
-            <button class="btn-action" onclick="claimQuest('str', 50, 40)">ACCEPT</button>
-        </div>
-        <div class="game-card">
-            <div>
-                <div class="card-name">[DAILY MISSION] INTELLIGENCE ACCELERATION SEC_02</div>
-                <div class="card-sub">Analyze 15-minute high-yield engineering hardware architectural system structures.</div>
-            </div>
-            <button class="btn-action" onclick="claimQuest('int', 50, 40)">ACCEPT</button>
-        </div>
-    </div>
 
-    <!-- ================= TAB 4: REWARDS ================= -->
-    <div id="pane-rewards" class="hud-content">
-        <div class="game-card" style="border-color: rgba(255,215,0,0.25);">
-            <div>
-                <div class="card-name" style="color: var(--sys-gold);">[INVENTORY EXCHANGE] AMUSEMENT TOKEN</div>
-                <div class="card-sub">Consume 40 Gold blocks to release a single narrative episode streaming segment allocation.</div>
+            <div class="gauge-wrapper">
+                <div class="gauge-label"><span>DAILY INTENSITY CONTEXT</span><span id="txt-day">0%</span></div>
+                <div class="gauge-track"><div class="gauge-fill" id="day-fill"></div></div>
             </div>
-            <button class="btn-action btn-gold" onclick="spendGold(40, 'Anime Voucher')">40 GOLD</button>
-        </div>
-        <div class="game-card" style="border-color: rgba(255,215,0,0.25);">
-            <div>
-                <div class="card-name" style="color: var(--sys-gold);">[INVENTORY EXCHANGE] SANDBOX ENGINE ACCESS</div>
-                <div class="card-sub">Consume 80 Gold blocks to activate a 1-hour constructive architectural survival build deployment.</div>
+            <div class="gauge-wrapper">
+                <div class="gauge-label"><span>WEEKLY PROCESSING TIMELINE</span><span id="txt-week">15%</span></div>
+                <div class="gauge-track"><div class="gauge-fill" id="week-fill" style="width: 15%;"></div></div>
             </div>
-            <button class="btn-action btn-gold" onclick="spendGold(80, 'Minecraft Hour')">80 GOLD</button>
         </div>
+
+        <!-- ================= PANEL 2: MISSIONS MATRIX ================= -->
+        <div id="pane-quests" class="matrix-pane">
+            <div class="directive-card">
+                <div>
+                    <div class="directive-name">[MISSION: PHYSICAL] CONDITIONING LOOP</div>
+                    <div class="directive-sub">Complete a 30-minute high-yield active out-of-door running or structural workout sequence.</div>
+                </div>
+                <button class="trigger-btn" onclick="processTask('str', 50, 40)">VALIDATE</button>
+            </div>
+
+            <div class="directive-card">
+                <div>
+                    <div class="directive-name">[MISSION: INTEL] SYSTEM ARCHITECTURE</div>
+                    <div class="directive-sub">Analyze a 15-minute high-fidelity system design or processing hardware microchip sequence.</div>
+                </div>
+                <button class="trigger-btn" onclick="processTask('int', 50, 40)">VALIDATE</button>
+            </div>
+        </div>
+
+        <!-- ================= PANEL 3: REWARDS INVENTORY ================= -->
+        <div id="pane-rewards" class="matrix-pane">
+            <div class="directive-card" style="border-color: rgba(255,215,0,0.25);">
+                <div>
+                    <div class="directive-name" style="color: var(--gold);">[REWARD] STREAMING PROTOCOL RELEASE</div>
+                    <div class="directive-sub">Extract a single action-narrative anime episode voucher from the memory vaults.</div>
+                </div>
+                <button class="trigger-btn trigger-gold" onclick="deductGold(40, 'Anime Voucher')">40 GOLD</button>
+            </div>
+
+            <div class="directive-card" style="border-color: rgba(255,215,0,0.25);">
+                <div>
+                    <div class="directive-name" style="color: var(--gold);">[REWARD] SANDBOX BUILD ALLOCATION</div>
+                    <div class="directive-sub">Extract a 1-hour architectural Minecraft survival core castle build session.</div>
+                </div>
+                <button class="trigger-btn trigger-gold" onclick="deductGold(80, 'Minecraft Matrix Session')">80 GOLD</button>
+            </div>
+        </div>
+
     </div>
 </div>
 
 <script>
-    // Embedded Audio Node Generation Framework
-    function playSound(variant) {
+    // Audio Synthesizer Framework for Immersive Acoustic Pings
+    function signalChime(toneType) {
         try {
             let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            let osc = audioCtx.createOscillator();
+            let oscillator = audioCtx.createOscillator();
             let gainNode = audioCtx.createGain();
-            osc.connect(gainNode);
+            oscillator.connect(gainNode);
             gainNode.connect(audioCtx.destination);
             
-            if (variant === 'nav') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+            if (toneType === 'click') {
+                oscillator.type = 'sine'; oscillator.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
                 gainNode.gain.setValueAtTime(0.04, audioCtx.currentTime);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.08);
-            } else if (variant === 'trigger') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
-                osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.08);
-                gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.2);
-            } else if (variant === 'fail') {
-                osc.type = 'triangle'; osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+                oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.06);
+            } else if (toneType === 'complete') {
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(659.25, audioCtx.currentTime); // E5
+                oscillator.frequency.setValueAtTime(987.77, audioCtx.currentTime + 0.08); // B5
+                gainNode.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.22);
+            } else if (toneType === 'alert') {
+                oscillator.type = 'triangle'; oscillator.frequency.setValueAtTime(140, audioCtx.currentTime);
                 gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.25);
+                oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.25);
             }
-        } catch(err) { console.log("Audio contextual block bypassed."); }
+        } catch(e) { console.log("Audio pipeline bypassed."); }
     }
 
-    let hunter = {
-        gold: parseInt(localStorage.getItem('h_gold')) || 0,
-        level: parseInt(localStorage.getItem('h_level')) || 12,
-        str: parseInt(localStorage.getItem('h_str')) || 45,
-        int: parseInt(localStorage.getItem('h_int')) || 62,
-        agi: parseInt(localStorage.getItem('h_agi')) || 38,
+    let coreState = {
+        gold: parseInt(localStorage.getItem('sov_gold')) || 0,
+        level: parseInt(localStorage.getItem('sov_level')) || 12,
+        str: parseInt(localStorage.getItem('sov_str')) || 45,
+        int: parseInt(localStorage.getItem('sov_int')) || 62,
         day: 0,
         week: 15
     };
 
-    function switchTab(evt, tabId) {
-        playSound('nav');
-        document.querySelectorAll('.hud-content').forEach(pane => pane.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    function engagePane(e, paneId) {
+        signalChime('click');
+        document.querySelectorAll('.matrix-pane').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.nav-node').forEach(n => n.classList.remove('active'));
         
-        document.getElementById(tabId).classList.add('active');
-        evt.currentTarget.classList.add('active');
+        document.getElementById(paneId).classList.add('active');
+        e.currentTarget.classList.add('active');
     }
 
-    function syncState() {
-        document.getElementById('prof-gold').innerText = hunter.gold;
-        document.getElementById('prof-level').innerText = hunter.level;
-        document.getElementById('day-fill').style.width = hunter.day + '%';
-        document.getElementById('txt-day').innerText = hunter.day + '%';
-        document.getElementById('val-str').innerText = hunter.str;
-        document.getElementById('val-int').innerText = hunter.int;
-        document.getElementById('val-agi').innerText = hunter.agi;
+    function refreshInterface() {
+        document.getElementById('lbl-gold').innerText = coreState.gold;
+        document.getElementById('lbl-level').innerText = coreState.level;
+        document.getElementById('day-fill').style.width = coreState.day + '%';
+        document.getElementById('txt-day').innerText = coreState.day + '%';
+        document.getElementById('val-str').innerText = coreState.str;
+        document.getElementById('val-int').innerText = coreState.int;
     }
 
-    window.claimQuest = function(statKey, prog, goldAdd) {
-        playSound('trigger');
-        hunter.gold += goldAdd;
-        hunter[statKey] += 2;
-        hunter.day = Math.min(hunter.day + prog, 100);
+    window.processTask = function(attribute, deltaProg, goldGift) {
+        signalChime('complete');
+        coreState.gold += goldGift;
+        coreState[attribute] += 2;
+        coreState.day = Math.min(coreState.day + deltaProg, 100);
         
-        localStorage.setItem('h_gold', hunter.gold);
-        localStorage.setItem('h_' + statKey, hunter[statKey]);
+        localStorage.setItem('sov_gold', coreState.gold);
+        localStorage.setItem('sov_' + attribute, coreState[attribute]);
         
-        if(hunter.day >= 100) {
-            hunter.day = 0;
-            hunter.level += 1;
-            hunter.week = Math.min(hunter.week + 25, 100);
-            localStorage.setItem('h_level', hunter.level);
-            document.getElementById('week-fill').style.width = hunter.week + '%';
-            document.getElementById('txt-week').innerText = hunter.week + '%';
-            document.getElementById('sys-feed').innerHTML = "[SYSTEM]: <span style='color:var(--sys-blue); font-weight:bold;'>MAINFRAME LEVEL UP!</span> Strategic sequence initialized. Core attributes updated.";
+        if (coreState.day >= 100) {
+            coreState.day = 0;
+            coreState.level += 1;
+            coreState.week = Math.min(coreState.week + 25, 100);
+            localStorage.setItem('sov_level', coreState.level);
+            document.getElementById('week-fill').style.width = coreState.week + '%';
+            document.getElementById('txt-week').innerText = coreState.week + '%';
+            document.getElementById('jarvis-out').innerHTML = "Outstanding execution, sir. <span style='color:var(--neon-blue); font-weight:bold;'>LEVEL OVERRUN CONFIRMED.</span> Core neurological metrics boosted. The evolution cycle is holding optimal parameters.";
         } else {
-            document.getElementById('sys-feed').innerText = "[SYSTEM]: Execution logged. Verified +" + goldAdd + "G and designated attribute points to core grid memory.";
+            document.getElementById('jarvis-out').innerText = "Objective metrics verified, sir. Secure ledger credited with +" + goldGift + "G. Calculated growth points mapped into your data slots.";
         }
         
         event.target.disabled = true;
         event.target.style.opacity = '0.15';
-        event.target.innerText = 'CLEARED';
-        syncState();
+        event.target.innerText = 'LOCKED';
+        refreshInterface();
     };
 
-    window.spendGold = function(cost, awardName) {
-        if(hunter.gold >= cost) {
-            playSound('trigger');
-            hunter.gold -= cost;
-            localStorage.setItem('h_gold', hunter.gold);
-            document.getElementById('sys-feed').innerHTML = "[SYSTEM]: Transaction processed successfully. <span style='color:var(--sys-gold);'>" + awardName + "</span> verification matrix released.";
-            syncState();
+    window.deductGold = function(valueAmount, rewardTitle) {
+        if (coreState.gold >= valueAmount) {
+            signalChime('complete');
+            coreState.gold -= valueAmount;
+            localStorage.setItem('sov_gold', coreState.gold);
+            document.getElementById('jarvis-out').innerHTML = "Authorization key granted, sir. Extraction matrix cleared for your <span style='color:var(--gold);'>" + rewardTitle + "</span> module. Enjoy your downtime allocation.";
+            refreshInterface();
         } else {
-            playSound('fail');
-            document.getElementById('sys-feed').innerHTML = "<span style='color:#f87171;'>[CRITICAL WARNING]: INSUFFICIENT GOLD VALUE STORES. PROCESS ACTIVE TASKS IMMEDIATELY.</span>";
+            signalChime('alert');
+            document.getElementById('jarvis-out').innerHTML = "<span style='color:#f87171;'>[CRITICAL DEFICIT]: SIR, RESOURCE VOLUME IS INSUFFICIENT. ACTIVATE MANDATORY MISSIONS IMMEDIATELY.</span>";
         }
     };
 
-    syncState();
+    refreshInterface();
 </script>
 </body>
 </html>
