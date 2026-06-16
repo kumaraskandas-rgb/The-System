@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE SYSTEM: OVERLORD CORE</title>
+    <title>THE SYSTEM: OVERLORD MAINFRAME</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
 
@@ -13,16 +13,16 @@
             --sys-glow: rgba(0, 243, 255, 0.4);
             --sys-gold: #ffd700;
             --void-bg: #010409;
-            --panel-glass: rgba(6, 16, 32, 0.92);
+            --panel-glass: rgba(6, 16, 32, 0.95);
         }
 
         body {
             background-color: var(--void-bg);
             background-image: 
-                radial-gradient(circle at 50% 15%, rgba(0, 150, 255, 0.2) 0%, transparent 55%),
+                radial-gradient(circle at 50% 15%, rgba(0, 150, 255, 0.25) 0%, transparent 60%),
                 linear-gradient(rgba(0, 243, 255, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 243, 255, 0.02) 1px, transparent 1px);
-            background-size: 100% 100%, 24px 24px, 24px 24px;
+            background-size: 100% 100%, 30px 30px, 30px 30px;
             color: #ffffff;
             font-family: 'Share Tech Mono', monospace;
             display: flex;
@@ -30,80 +30,80 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 15px;
+            padding: 40px 20px;
             box-sizing: border-box;
         }
 
+        /* Expanded to full-screen desktop dimensions */
         .system-frame {
             width: 100%;
-            max-width: 550px;
+            max-width: 950px; /* Massively expanded width */
             background: var(--panel-glass);
             border: 2px solid var(--sys-blue);
-            box-shadow: 0 0 30px var(--sys-glow), inset 0 0 20px rgba(0, 243, 255, 0.15);
-            border-radius: 6px;
-            padding: 20px;
+            box-shadow: 0 0 40px var(--sys-glow), inset 0 0 30px rgba(0, 243, 255, 0.15);
+            border-radius: 8px;
+            padding: 40px; /* More internal breathing room */
             backdrop-filter: blur(12px);
             position: relative;
         }
 
-        /* Sci-Fi HUD Accents */
-        .system-frame::before { content: '◈'; position: absolute; top: 4px; left: 8px; color: var(--sys-blue); font-size: 10px; opacity: 0.6; }
-        .system-frame::after { content: 'SYSTEM_CORE_v2.0'; position: absolute; bottom: 4px; right: 8px; color: rgba(0,243,255,0.3); font-size: 8px; letter-spacing: 1px; }
+        .system-frame::before { content: '◈ SYSTEM_MAINFRAME_ONLINE'; position: absolute; top: 12px; left: 15px; color: var(--sys-blue); font-size: 11px; font-family: 'Orbitron', sans-serif; letter-spacing: 2px; opacity: 0.7; }
+        .system-frame::after { content: 'DESIGNATION: ECE_HUNTER_CORE'; position: absolute; bottom: 12px; right: 15px; color: rgba(0,243,255,0.3); font-size: 10px; letter-spacing: 2px; }
 
         .header-block {
             text-align: center;
-            border-bottom: 2px solid rgba(0, 243, 255, 0.2);
-            padding-bottom: 12px;
-            margin-bottom: 15px;
+            border-bottom: 3px double var(--sys-blue);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .main-headline {
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
-            font-size: 1.8rem;
-            letter-spacing: 5px;
+            font-size: 2.8rem; /* Bigger title text */
+            letter-spacing: 8px;
             margin: 0;
             color: #ffffff;
-            text-shadow: 0 0 12px var(--sys-blue);
+            text-shadow: 0 0 15px var(--sys-blue), 0 0 30px var(--sys-dark);
         }
 
-        /* Navigation Tabs Menu - Game Style */
+        /* Upgraded Wide Navigation Grid */
         .nav-tabs {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 5px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 35px;
         }
 
         .tab-btn {
-            background: rgba(0, 243, 255, 0.05);
+            background: rgba(0, 243, 255, 0.03);
             border: 1px solid rgba(0, 243, 255, 0.2);
             color: #94a3b8;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.72rem;
-            font-weight: bold;
-            padding: 10px 2px;
+            font-size: 1rem; /* Highly readable font sizing */
+            font-weight: 700;
+            padding: 16px 10px;
             cursor: pointer;
             text-align: center;
-            letter-spacing: 1px;
-            transition: all 0.25s ease;
+            letter-spacing: 2px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .tab-btn:hover {
             color: #ffffff;
-            background: rgba(0, 243, 255, 0.1);
+            background: rgba(0, 243, 255, 0.08);
             border-color: var(--sys-blue);
+            box-shadow: 0 0 12px rgba(0, 243, 255, 0.15);
         }
 
         .tab-btn.active {
             background: linear-gradient(180deg, rgba(0,243,255,0.2) 0%, rgba(0,68,136,0.4) 100%);
             border: 1px solid var(--sys-blue);
             color: var(--sys-blue);
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
-            text-shadow: 0 0 5px var(--sys-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.35);
+            text-shadow: 0 0 8px var(--sys-blue);
         }
 
-        /* Sub-screens (hidden by default) */
         .hud-content {
             display: none;
             animation: paneFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -112,74 +112,82 @@
         .hud-content.active { display: block; }
 
         @keyframes paneFade {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Universal System Blocks */
+        /* Large System Panel Blocks */
         .status-box {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(0, 243, 255, 0.15);
-            padding: 14px;
-            margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            padding: 24px;
+            margin-bottom: 25px;
             border-radius: 4px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
         }
 
         .info-row {
             display: flex;
             justify-content: space-between;
-            margin: 8px 0;
-            font-size: 1.05rem;
-            border-bottom: 1px dashed rgba(255,255,255,0.05);
-            padding-bottom: 4px;
+            margin: 14px 0;
+            font-size: 1.4rem; /* Prominent clear text sizing */
+            border-bottom: 1px dashed rgba(0, 243, 255, 0.15);
+            padding-bottom: 10px;
         }
 
-        .cyan-glow { color: var(--sys-blue); text-shadow: 0 0 5px rgba(0,243,255,0.4); }
-        .gold-glow { color: var(--sys-gold); text-shadow: 0 0 5px rgba(255,215,0,0.4); font-weight: bold; }
+        .cyan-glow { color: var(--sys-blue); text-shadow: 0 0 8px rgba(0,243,255,0.5); font-weight: bold; }
+        .gold-glow { color: var(--sys-gold); text-shadow: 0 0 8px rgba(255,215,0,0.5); font-weight: bold; }
 
-        /* RPG Stats Progress bars */
-        .meter-group { margin: 12px 0; }
-        .meter-label { display: flex; justify-content: space-between; font-size: 0.85rem; color: #94a3b8; margin-bottom: 4px; }
-        .meter-track { background: rgba(0,0,0,0.6); height: 10px; border: 1px solid rgba(0, 243, 255, 0.2); padding: 1px; }
-        .meter-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--sys-dark), var(--sys-blue)); box-shadow: 0 0 8px var(--sys-blue); transition: width 0.5s ease; }
+        /* Widescreen Performance Bars */
+        .meter-group { margin: 24px 0; }
+        .meter-label { display: flex; justify-content: space-between; font-size: 1.1rem; color: #cbd5e1; margin-bottom: 8px; letter-spacing: 2px; }
+        .meter-track { background: rgba(0,0,0,0.7); height: 18px; border: 1px solid rgba(0, 243, 255, 0.3); padding: 2px; }
+        .meter-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--sys-dark), var(--sys-blue)); box-shadow: 0 0 15px var(--sys-blue); transition: width 0.6s cubic-bezier(0.1, 0.8, 0.2, 1); }
 
-        /* Quest & Cards layout */
+        /* Large Game Cards */
         .game-card {
-            background: rgba(0, 243, 255, 0.02);
-            border: 1px solid rgba(0, 243, 255, 0.1);
-            padding: 14px;
-            margin-bottom: 10px;
+            background: rgba(0, 243, 255, 0.01);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            padding: 20px 25px;
+            margin-bottom: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.2s;
+            transition: all 0.25s ease;
         }
-        .game-card:hover { background: rgba(0, 243, 255, 0.05); border-color: var(--sys-blue); }
-        .card-name { font-size: 1.1rem; font-weight: bold; }
-        .card-sub { font-size: 0.85rem; color: #64748b; margin-top: 2px; }
+        .game-card:hover { 
+            background: rgba(0, 243, 255, 0.04); 
+            border-color: var(--sys-blue);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+        }
+        .card-name { font-size: 1.3rem; font-weight: bold; letter-spacing: 1px; }
+        .card-sub { font-size: 1rem; color: #94a3b8; margin-top: 5px; }
 
         .btn-action {
             background: transparent;
-            border: 1px solid var(--sys-blue);
+            border: 2px solid var(--sys-blue);
             color: var(--sys-blue);
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            padding: 8px 14px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            padding: 12px 24px;
             cursor: pointer;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             transition: all 0.2s;
         }
-        .btn-action:hover { background: var(--sys-blue); color: var(--void-bg); box-shadow: 0 0 15px var(--sys-blue); font-weight: bold; }
+        .btn-action:hover { background: var(--sys-blue); color: var(--void-bg); box-shadow: 0 0 20px var(--sys-blue); }
         .btn-gold { border-color: var(--sys-gold); color: var(--sys-gold); }
-        .btn-gold:hover { background: var(--sys-gold); color: var(--void-bg); box-shadow: 0 0 15px var(--sys-gold); }
+        .btn-gold:hover { background: var(--sys-gold); color: var(--void-bg); box-shadow: 0 0 20px var(--sys-gold); }
 
         .log-terminal {
-            border-left: 3px solid var(--sys-blue);
-            background: rgba(0,4,12,0.8);
-            padding: 10px 14px;
+            border-left: 4px solid var(--sys-blue);
+            background: rgba(0,4,12,0.9);
+            padding: 16px 20px;
             color: #93c5fd;
-            font-size: 0.95rem;
-            margin-bottom: 15px;
+            font-size: 1.15rem;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -187,51 +195,51 @@
 
 <div class="system-frame">
     <div class="header-block">
-        <h1 class="main-headline">STATUS WINDOW</h1>
+        <h1 class="main-headline">STATUS MAINFRAME</h1>
     </div>
 
-    <!-- Switcher Dashboard Navigation -->
+    <!-- Wide Navigation Grid Tabs -->
     <div class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab(event, 'pane-profile')">PROFILE</button>
         <button class="tab-btn" onclick="switchTab(event, 'pane-stats')">STATS</button>
-        <button class="tab-btn" onclick="switchTab(event, 'pane-tasks')">QUESTS</button>
-        <button class="tab-btn" onclick="switchTab(event, 'pane-rewards')">REWARDS</button>
+        <button class="tab-btn" onclick="switchTab(event, 'pane-tasks')">QUEST BOARD</button>
+        <button class="tab-btn" onclick="switchTab(event, 'pane-rewards')">REWARD SHOP</button>
     </div>
 
-    <!-- Active Event Transmission Terminal -->
+    <!-- Feed Monitoring Box -->
     <div class="log-terminal" id="sys-feed">
-        [SYSTEM]: Core modules integrated. Welcome back, Hunter Kumara Skandas.
+        [SYSTEM]: Core interface synchronization online. Standing by for execution clearance, Hunter.
     </div>
 
     <!-- ================= TAB 1: PROFILE ================= -->
     <div id="pane-profile" class="hud-content active">
         <div class="status-box">
-            <div class="info-row"><span>NAME:</span><span class="cyan-glow">KUMARA SKANDAS</span></div>
-            <div class="info-row"><span>CLASS:</span><span class="cyan-glow">ECE DEPLOYED HUNTER</span></div>
-            <div class="info-row"><span>LEVEL:</span><span class="cyan-glow" id="prof-level">12</span></div>
-            <div class="info-row"><span>GOLD CACHE:</span><span class="gold-glow" id="prof-gold">0</span>G</div>
+            <div class="info-row"><span>PLAYER UNIQUE DESIGNATION:</span><span class="cyan-glow">KUMARA SKANDAS</span></div>
+            <div class="info-row"><span>ACTIVE SECTOR CLASS:</span><span class="cyan-glow">ECE DEPLOYED HUNTER</span></div>
+            <div class="info-row"><span>CURRENT LEVEL:</span><span class="cyan-glow" id="prof-level">12</span></div>
+            <div class="info-row"><span>INVENTORY GOLD VALUATION:</span><span class="gold-glow" id="prof-gold">0</span>G</div>
         </div>
-        <div class="status-box" style="border-left: 2px solid var(--sys-gold);">
-            <div style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 5px;">ACTIVE TITLE EFFECTS</div>
-            <div style="font-size: 1.1rem; font-weight: bold; color: var(--sys-gold);">[THE ARCHITECT OVERLORD]</div>
-            <div style="font-size: 0.85rem; color: #64748b; margin-top: 3px;">+40% Focus buffer limits during heavy processing segments.</div>
+        <div class="status-box" style="border-left: 4px solid var(--sys-gold); background: linear-gradient(90deg, rgba(255,215,0,0.03) 0%, transparent 100%);">
+            <div style="font-size: 1.1rem; color: #cbd5e1; margin-bottom: 6px; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;">ACTIVE TITLE MATRIX CONTEXT</div>
+            <div style="font-size: 1.5rem; font-weight: 900; color: var(--sys-gold); letter-spacing: 2px;">[THE ARCHITECT OVERLORD]</div>
+            <div style="font-size: 1rem; color: #94a3b8; margin-top: 6px; line-height: 1.4;">Active system parameters apply a +40% concentration baseline cushion during hardware mapping and structural optimization operations.</div>
         </div>
     </div>
 
     <!-- ================= TAB 2: STATS ================= -->
     <div id="pane-stats" class="hud-content">
         <div class="status-box">
-            <div class="info-row"><span>STRENGTH (Physical Execution):</span><span class="cyan-glow" id="val-str">45</span></div>
-            <div class="info-row"><span>INTELLIGENCE (Technical Focus):</span><span class="cyan-glow" id="val-int">62</span></div>
-            <div class="info-row"><span>AGILITY (Consistency Speed):</span><span class="cyan-glow" id="val-agi">38</span></div>
+            <div class="info-row"><span>STRENGTH (Physical Consistency Matrix):</span><span class="cyan-glow" id="val-str">45</span></div>
+            <div class="info-row"><span>INTELLIGENCE (Technical Strategic Focus):</span><span class="cyan-glow" id="val-int">62</span></div>
+            <div class="info-row"><span>AGILITY (Operational Execution Velocity):</span><span class="cyan-glow" id="val-agi">38</span></div>
         </div>
         
         <div class="meter-group">
-            <div class="meter-label"><span>DAILY OBJECTIVES COMPLETION</span><span id="txt-day">0%</span></div>
+            <div class="meter-label"><span>DAILY OBJECTIVES CALIBRATION</span><span id="txt-day">0%</span></div>
             <div class="meter-track"><div class="meter-bar" id="day-fill"></div></div>
         </div>
         <div class="meter-group">
-            <div class="meter-label"><span>WEEKLY PROGRESS MATRIX</span><span id="txt-week">15%</span></div>
+            <div class="meter-label"><span>WEEKLY LOOP TARGET METRICS</span><span id="txt-week">15%</span></div>
             <div class="meter-track"><div class="meter-bar" id="week-fill" style="width: 15%;"></div></div>
         </div>
     </div>
@@ -240,15 +248,15 @@
     <div id="pane-tasks" class="hud-content">
         <div class="game-card">
             <div>
-                <div class="card-name">[DAILY] PHYSICAL CONDITIONING</div>
-                <div class="card-sub">Execute 30-min active body movement / workout run</div>
+                <div class="card-name">[DAILY MISSION] PHYSICAL CONDITIONING SEC_01</div>
+                <div class="card-sub">Execute a 30-minute high-vibrancy active outdoor core workout or run tracking allocation.</div>
             </div>
             <button class="btn-action" onclick="claimQuest('str', 50, 40)">ACCEPT</button>
         </div>
         <div class="game-card">
             <div>
-                <div class="card-name">[DAILY] INTELLIGENCE MATRIX</div>
-                <div class="card-sub">Analyze 15-min architectural video on hardware microchips</div>
+                <div class="card-name">[DAILY MISSION] INTELLIGENCE ACCELERATION SEC_02</div>
+                <div class="card-sub">Analyze 15-minute high-yield engineering hardware architectural system structures.</div>
             </div>
             <button class="btn-action" onclick="claimQuest('int', 50, 40)">ACCEPT</button>
         </div>
@@ -256,25 +264,25 @@
 
     <!-- ================= TAB 4: REWARDS ================= -->
     <div id="pane-rewards" class="hud-content">
-        <div class="game-card" style="border-color: rgba(255,215,0,0.15);">
+        <div class="game-card" style="border-color: rgba(255,215,0,0.25);">
             <div>
-                <div class="card-name" style="color: var(--sys-gold);">[DOWNTIME] ANIME VOUCHER</div>
-                <div class="card-sub">Exchange 40G for 1 high-stakes anime episode release</div>
+                <div class="card-name" style="color: var(--sys-gold);">[INVENTORY EXCHANGE] AMUSEMENT TOKEN</div>
+                <div class="card-sub">Consume 40 Gold blocks to release a single narrative episode streaming segment allocation.</div>
             </div>
-            <button class="btn-action btn-gold" onclick="spendGold(40, 'Anime Voucher')">40G</button>
+            <button class="btn-action btn-gold" onclick="spendGold(40, 'Anime Voucher')">40 GOLD</button>
         </div>
-        <div class="game-card" style="border-color: rgba(255,215,0,0.15);">
+        <div class="game-card" style="border-color: rgba(255,215,0,0.25);">
             <div>
-                <div class="card-name" style="color: var(--sys-gold);">[SQUAD] SANDBOX ALLOCATION</div>
-                <div class="card-sub">Exchange 80G for 1 hour Minecraft castle building session</div>
+                <div class="card-name" style="color: var(--sys-gold);">[INVENTORY EXCHANGE] SANDBOX ENGINE ACCESS</div>
+                <div class="card-sub">Consume 80 Gold blocks to activate a 1-hour constructive architectural survival build deployment.</div>
             </div>
-            <button class="btn-action btn-gold" onclick="spendGold(80, 'Minecraft Hour')">80G</button>
+            <button class="btn-action btn-gold" onclick="spendGold(80, 'Minecraft Hour')">80 GOLD</button>
         </div>
     </div>
 </div>
 
 <script>
-    // System Sound FX Engine via Web Audio API
+    // Embedded Audio Node Generation Framework
     function playSound(variant) {
         try {
             let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -284,13 +292,13 @@
             gainNode.connect(audioCtx.destination);
             
             if (variant === 'nav') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(440, audioCtx.currentTime); // A4
+                osc.type = 'sine'; osc.frequency.setValueAtTime(440, audioCtx.currentTime);
                 gainNode.gain.setValueAtTime(0.04, audioCtx.currentTime);
                 osc.start(); osc.stop(audioCtx.currentTime + 0.08);
             } else if (variant === 'trigger') {
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
-                osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.08); // G5
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.08);
                 gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
                 osc.start(); osc.stop(audioCtx.currentTime + 0.2);
             } else if (variant === 'fail') {
@@ -298,10 +306,9 @@
                 gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
                 osc.start(); osc.stop(audioCtx.currentTime + 0.25);
             }
-        } catch(err) { console.log("Audio block bypassed."); }
+        } catch(err) { console.log("Audio contextual block bypassed."); }
     }
 
-    // Core System Local State Memory Configuration
     let hunter = {
         gold: parseInt(localStorage.getItem('h_gold')) || 0,
         level: parseInt(localStorage.getItem('h_level')) || 12,
@@ -334,7 +341,7 @@
     window.claimQuest = function(statKey, prog, goldAdd) {
         playSound('trigger');
         hunter.gold += goldAdd;
-        hunter[statKey] += 2; // Incremental Level up on Stats attributes
+        hunter[statKey] += 2;
         hunter.day = Math.min(hunter.day + prog, 100);
         
         localStorage.setItem('h_gold', hunter.gold);
@@ -347,9 +354,9 @@
             localStorage.setItem('h_level', hunter.level);
             document.getElementById('week-fill').style.width = hunter.week + '%';
             document.getElementById('txt-week').innerText = hunter.week + '%';
-            document.getElementById('sys-feed').innerHTML = "[SYSTEM]: <span style='color:var(--sys-blue); font-weight:bold;'>LEVEL UP!</span> Phase Cleared. Baseline stats updated.";
+            document.getElementById('sys-feed').innerHTML = "[SYSTEM]: <span style='color:var(--sys-blue); font-weight:bold;'>MAINFRAME LEVEL UP!</span> Strategic sequence initialized. Core attributes updated.";
         } else {
-            document.getElementById('sys-feed').innerText = "[SYSTEM]: Objective synced. +" + goldAdd + "G logged. Stat attribute points calculated.";
+            document.getElementById('sys-feed').innerText = "[SYSTEM]: Execution logged. Verified +" + goldAdd + "G and designated attribute points to core grid memory.";
         }
         
         event.target.disabled = true;
@@ -363,11 +370,11 @@
             playSound('trigger');
             hunter.gold -= cost;
             localStorage.setItem('h_gold', hunter.gold);
-            document.getElementById('sys-feed').innerHTML = "[SYSTEM]: Authorized. <span style='color:var(--sys-gold);'>" + awardName + "</span> extraction token dispatched.";
+            document.getElementById('sys-feed').innerHTML = "[SYSTEM]: Transaction processed successfully. <span style='color:var(--sys-gold);'>" + awardName + "</span> verification matrix released.";
             syncState();
         } else {
             playSound('fail');
-            document.getElementById('sys-feed').innerHTML = "<span style='color:#f87171;'>[WARNING]: INSUFFICIENT GOLD RESERVES. COMPLETE ADDITIONAL EXECUTIONS.</span>";
+            document.getElementById('sys-feed').innerHTML = "<span style='color:#f87171;'>[CRITICAL WARNING]: INSUFFICIENT GOLD VALUE STORES. PROCESS ACTIVE TASKS IMMEDIATELY.</span>";
         }
     };
 
